@@ -1,0 +1,23 @@
+form{
+    margin: 50px;
+    display: inline-block;
+}
+a{
+    display: inline-block;
+    vertical-align: top;
+    margin: 20px;
+}
+p{
+    margin-bottom: 0;
+}
+textarea{
+    height: 100px;
+    width: 300px;
+    resize: none;
+}
+input{
+    margin-bottom: 20px;
+}
+.messages{
+    color: red;
+}

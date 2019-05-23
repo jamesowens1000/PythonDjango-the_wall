@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>The Wall</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'wall/wall.css' %}">
+        <script>
+            var initVal = "";
+            $(document).ready(function(){
+                $("#msgBtn").attr("disabled", "true");
+                $("#msgText").keyup(function(){
+                    if ($(this).val() != initVal) {
+                        $("#msgBtn").removeAttr("disabled");
+                    } else {
+                        $("#msgBtn").attr("disabled", "true");
+                    }
+                });
+            });
+            $(document).ready(function(){
+                $(".cmntBtn").attr("disabled", "true");
+                $(".cmntText").keyup(function(){
+                    if ($(this).val() != initVal) {
+                        $(".cmntBtn").removeAttr("disabled");
+                    } else {
+                        $(".cmntBtn").attr("disabled", "true");
+                    }
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div id="header">
+            <h4>CodingDojo Wall</h4>
+            <p>Welcome {{request.session.user_fname}}</p>
+            <a href="/edit_page">Edit My User Info</a>
+            <a href="/logout">Log Off</a>
+        </div>
+        <div id="content">
+            <form action="/post_message" method="POST">
+                {% csrf_token %}
+                <h6>Post a Message</h6>
+                <textarea id="msgText" name="msgText"></textarea>
+                <input id="msgBtn" type="submit" value="Post a message">
+            </form>
+            {% for msg in all_msgs %}
+                <p class="msgHead"><a href="/user_posts/{{ msg.user.id }}">{{ msg.user.first_name }} {{ msg.user.last_name }}</a> - {{ msg.created_at|date:"F jS Y" }} {% if msg.user.id == request.session.user_id %} | <a href="/delete/{{msg.id}}">Delete</a>{% endif %} | <a href="/like_msg/{{msg.id}}">LIKE</a> | Likes: {{ msg.like.count }}</p>
+                <p class="msgBody">{{ msg.message }}</p>
+                {% for cmnt in msg.comments.all %}
+                        <p class="cmntHead"><a href="/user_posts/{{ cmnt.user.id }}">{{ cmnt.user.first_name }} {{ cmnt.user.last_name }}</a> - {{ cmnt.created_at|date:"F jS Y" }} | <a href="/like_cmnt/{{cmnt.id}}">LIKE</a> | Likes: {{ cmnt.like.count }}</p>
+                        <p class="cmntBody">{{ cmnt.comment }}</p>
+                {% endfor %}
+                <form action="/post_comment/{{msg.id}}" method="POST">
+                    {% csrf_token %}
+                    <h6 id="cmntHead">Post a Comment</h6>
+                    <textarea class="cmntText" name="cmntText"></textarea>
+                    <input class="cmntBtn" type="submit" value="Post a comment">
+                </form>
+            {% endfor %}
+        </div>
+    </body>
+</html>

@@ -1,0 +1,74 @@
+body{
+    padding: 25px;
+}
+#header{
+    height: 50px;
+    width: 900px;
+    padding: 10px;
+    border: 2px solid black;
+    border-bottom: none;
+}
+#header h4, #header p, #header a{
+    display: inline-block;
+    vertical-align: top;
+}
+#header h4{
+    margin-right: 175px;
+}
+#header p{
+    margin-right: 45px;
+}
+#header a{
+    margin-right: 65px;
+}
+#content{
+    min-height: 500px;
+    width: 900px;
+    border: 2px solid black;
+    padding: 25px 75px;
+}
+#msgText{
+    height: 75px;
+    width: 750px;
+    resize: none;
+}
+#msgBtn{
+    height: 35px;
+    width: 135px;
+    margin-left: 615px;
+    margin-bottom: 10px;
+    background-color: steelblue;
+    color: white;
+}
+.msgHead{
+    font-weight: bold;
+    font-size: small;
+}
+.msgBody{
+    margin-left: 15px;
+}
+#cmntHead{
+    margin-left: 15px;
+}
+.cmntText{
+    height: 65px;
+    width: 735px;
+    margin-left: 15px;
+    resize: none;
+}
+.cmntBtn{
+    height: 35px;
+    width: 135px;
+    margin-left: 615px;
+    margin-bottom: 10px;
+    background-color: limegreen;
+    color: white;
+}
+.cmntHead{
+    font-weight: bold;
+    font-size: small;
+    margin-left: 15px;
+}
+.cmntBody{
+    margin-left: 15px;
+}

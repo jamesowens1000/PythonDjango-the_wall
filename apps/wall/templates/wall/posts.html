@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>User Posts</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'wall/wall.css' %}">
+    </head>
+    <body>
+        <div id="header">
+            <h4>CodingDojo Wall - Users Posts</h4>
+            <p>Welcome {{request.session.user_fname}}</p>
+            <a href="/wall">Go Back</a>
+        </div>
+        <div id="content">
+            <h6>User Messages</h6>
+            {% for msg in user_messages %}
+                <p class="msgHead">{{ msg.user.first_name }} {{ msg.user.last_name }} - {{ msg.created_at|date:"F jS Y" }}</p>
+                <p class="msgBody">{{ msg.message }}</p>
+            {% endfor %}
+            <h6>User Comments</h6>
+            {% for cmnt in user_comments %}
+                    <p class="cmntHead">{{ cmnt.user.first_name }} {{ cmnt.user.last_name }} - {{ cmnt.created_at|date:"F jS Y" }}</p>
+                    <p class="cmntBody">{{ cmnt.comment }}</p>
+            {% endfor %}
+        </div>
+    </body>
+</html>
